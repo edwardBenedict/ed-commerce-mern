@@ -13,18 +13,7 @@ require("dotenv").config();
 router.get("/", check, getProducts);
 router.get("/:id", check, getProduct);
 router.delete("/:id", check, deleteProduct);
-router.post(
-  "/add",
-  // check,
-  uploadImage.single("file"),
-  addProduct
-);
-router.put("/:id", check, updateProduct);
-// router.post("/upload", uploadImage.single("file"), async (req, res) => {
-//   console.log("UPLOAD", req.file);
-//   if (req.file === undefined) return res.send("You must select a file.");
-//   const imgUrl = `${process.env.HOST_DOMAIN}:${process.env.SERVER_PORT}/file/${req.file.filename}`;
-//   return res.send(imgUrl);
-// });
+router.post("/add", check, uploadImage.single("file"), addProduct);
+router.put("/:id", check, uploadImage.single("file"), updateProduct);
 
 module.exports = router;

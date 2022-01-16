@@ -67,13 +67,22 @@ const deleteProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  Product.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(result);
+  let imgUrl;
+  if (req.file) {
+    imgUrl = `${process.env.HOST_DOMAIN}:${process.env.SERVER_PORT}/api/file/${req.file.filename}`;
+  }
+
+  Product.findByIdAndUpdate(
+    req.params.id,
+    { ...req.body, image: imgUrl ? imgUrl : req.body.image },
+    function (err, result) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(result);
+      }
     }
-  });
+  );
 };
 
 module.exports = {

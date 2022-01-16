@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Product from "../../../components/product/Product";
-import { api } from "../../../helpers/functions/api";
+import { formDataApi, api } from "../../../helpers/functions/api";
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -15,17 +15,19 @@ const UpdateProduct = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    const { name, value, files } = e.target;
+    if (files) {
+      setProduct({ ...product, [name]: files[0] });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await api(`/api/products/${id}`, "PUT", product);
+    const response = await formDataApi(`/api/products/${id}`, "PUT", product);
     response.status === 200
-      ? // ? getProduct()
-        navigate("/products")
+      ? navigate("/products")
       : console.log("Error:", response.message);
   };
 
