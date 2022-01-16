@@ -2,6 +2,8 @@ import { useState } from "react";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -37,6 +39,22 @@ const Register = () => {
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="text"
+            name="firstName"
+            value={credentials.firstName}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="lastName"
+            value={credentials.lastName}
+            onChange={handleChange}
+          />
+        </div>
         <div>
           <input
             type="text"
