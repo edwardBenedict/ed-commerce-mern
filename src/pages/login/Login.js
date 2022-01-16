@@ -1,6 +1,10 @@
 import { useState } from "react";
+import styles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
+import { postApi } from "../../helpers/functions.js/api";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -12,49 +16,42 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(credentials);
-    fetch("/api/auth/login", {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(credentials),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(function (res) {
-        console.log(res);
-      });
+    const response = await postApi("/api/auth/login", credentials);
+    response.status === 200
+      ? navigate("/")
+      : console.log("Error:", response.message);
   };
+
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="centerize">
+      <div>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="text"
+              name="email"
+              value={credentials.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={credentials.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

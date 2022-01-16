@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { postApi } from "../../helpers/functions.js/api";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  let navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -14,35 +18,24 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(credentials);
-    fetch("/api/auth/register", {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(credentials),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(function (res) {
-        console.log(res);
-      });
+    const response = await postApi("/api/auth/register", credentials);
+    response.status === 201
+      ? navigate("/")
+      : console.log("Error:", response.message);
   };
+
   return (
-    <div>
+    <div className="centerize">
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <input
             type="text"
             name="firstName"
+            placeholder="First Name"
             value={credentials.firstName}
             onChange={handleChange}
           />
@@ -51,6 +44,7 @@ const Register = () => {
           <input
             type="text"
             name="lastName"
+            placeholder="Last Name"
             value={credentials.lastName}
             onChange={handleChange}
           />
@@ -59,6 +53,7 @@ const Register = () => {
           <input
             type="text"
             name="email"
+            placeholder="Email"
             value={credentials.email}
             onChange={handleChange}
           />
@@ -67,6 +62,7 @@ const Register = () => {
           <input
             type="password"
             name="password"
+            placeholder="Password"
             value={credentials.password}
             onChange={handleChange}
           />
