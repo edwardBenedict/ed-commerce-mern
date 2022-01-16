@@ -28,4 +28,23 @@ const addProduct = async (req, res) => {
   // Our register logic ends here
 };
 
-module.exports = { addProduct };
+const getProducts = async (req, res) => {
+  try {
+    Product.find({}, function (err, products) {
+      res.status(200).send([...products]);
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong!", error });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Product deleted successfully!" });
+  } catch (error) {
+    res.status(500).send({ message: "Something Went Wring!" });
+  }
+};
+
+module.exports = { addProduct, getProducts, deleteProduct };
