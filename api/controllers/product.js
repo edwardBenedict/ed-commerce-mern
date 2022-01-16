@@ -16,7 +16,7 @@ const addProduct = async (req, res) => {
 
     if (req.file === undefined)
       return res.json({ message: "You must select a file." });
-    const imgUrl = `${process.env.HOST_DOMAIN}:${process.env.SERVER_PORT}/file/${req.file.filename}`;
+    const imgUrl = `${process.env.HOST_DOMAIN}:${process.env.SERVER_PORT}/api/file/${req.file.filename}`;
 
     const product = await Product.create({
       name,
