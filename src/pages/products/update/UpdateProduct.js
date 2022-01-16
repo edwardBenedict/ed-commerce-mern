@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Product from "../../../components/product/Product";
 import { api } from "../../../helpers/functions/api";
 
-const AddProduct = () => {
-  let navigate = useNavigate();
+const UpdateProduct = () => {
+  const { id } = useParams();
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -20,22 +20,28 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await api("/api/products/add", "POST", product);
-    response.status === 200
-      ? navigate("/products")
-      : console.log("Error:", response.message);
+    console.log(product);
   };
+
+  useEffect(async () => {
+    const response = await api(`/api/products/${id}`, "GET");
+    response.status === 200
+      ? setProduct(response.data)
+      : console.log("Error:", response.message);
+  }, []);
 
   return (
     <div className="centerize">
-      <h2>Add Product</h2>
-      <Product
-        product={product}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
+      <h2>Update Product</h2>
+      <div>
+        <Product
+          product={product}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+      </div>
     </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

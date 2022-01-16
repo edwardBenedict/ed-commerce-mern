@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import Navbar from "../components/navbar/Navbar";
 import Products from "../pages/products/Products";
 import AddProduct from "../pages/products/add/AddProduct";
+import UpdateProduct from "../pages/products/update/UpdateProduct";
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/add" element={<AddProduct />} />
+        <Route path="/products/update/:id" element={<UpdateProduct />} />
       </Routes>
     </BrowserRouter>
   );

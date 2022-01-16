@@ -38,6 +38,19 @@ const getProducts = async (req, res) => {
   }
 };
 
+const getProduct = async (req, res) => {
+  const { id } = req.params;
+  console.log("id", id);
+  res.status(200).send(await Product.findById(id));
+  // try {
+  //   Product.find({}, function (err, products) {
+  //     res.status(200).send([...products]);
+  //   });
+  // } catch (error) {
+  //   res.status(500).json({ message: "Something went wrong!", error });
+  // }
+};
+
 const deleteProduct = async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -47,4 +60,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { addProduct, getProducts, deleteProduct };
+module.exports = { addProduct, getProducts, deleteProduct, getProduct };

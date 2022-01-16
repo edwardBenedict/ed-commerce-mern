@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../helpers/functions/api";
 
 const Products = () => {
+  let navigate = useNavigate();
   const [products, setProducts] = useState();
 
   const getProducts = async () => {
@@ -24,6 +26,10 @@ const Products = () => {
     } else {
       console.log("Error:", response.message);
     }
+  };
+
+  const handleUpdate = (id) => {
+    navigate(`/products/update/${id}`);
   };
 
   return (
@@ -52,7 +58,12 @@ const Products = () => {
                 .toString()
                 ?.replace("GMT+0100 (Central European Standard Time)", "CET")}
             </p>
-            <button onClick={() => handleDelete(product._id)}>Delete</button>
+            <button className="m-10" onClick={() => handleDelete(product._id)}>
+              Delete
+            </button>
+            <button className="m-10" onClick={() => handleUpdate(product._id)}>
+              Update
+            </button>
           </div>
         ))}
     </div>

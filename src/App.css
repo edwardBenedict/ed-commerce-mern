@@ -21,3 +21,15 @@
 .bor-rad-3 {
   border-radius: 3px;
 }
+
+.d-flex {
+  display: flex;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+.a-center {
+  align-items: center;
+}
