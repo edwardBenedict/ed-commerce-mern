@@ -57,6 +57,11 @@ const Product = ({ handleChange, handleSubmit, product }) => {
         <div className="m-10">
           <input type="file" name="file" onChange={handleChange} />
         </div>
+        {product.image && (
+          <div>
+            <img src={product.image} alt={product.name} />
+          </div>
+        )}
         <div className="m-10">
           <button type="submit">Submit</button>
         </div>
