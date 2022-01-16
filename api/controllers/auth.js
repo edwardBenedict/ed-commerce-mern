@@ -98,6 +98,13 @@ const login = async (req, res) => {
       user.__v = undefined;
 
       // user
+      res.cookie("token", user.token, {
+        maxAge: 86400,
+        // You can't access these tokens in the client's javascript
+        httpOnly: true,
+        // Forces to use https in production
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      });
       res.status(200).json({ user, message: "Logged in Successfully!" });
     } else {
       res.status(400).send({ message: "Invalid Credentials" });
