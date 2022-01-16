@@ -5,10 +5,11 @@ const {
   deleteProduct,
   getProduct,
 } = require("../controllers/product");
+const check = require("../middlewares/authentication/check");
 
-router.get("/", getProducts);
-router.get("/:id", getProduct);
-router.delete("/:id", deleteProduct);
-router.post("/add", addProduct);
+router.get("/", check, getProducts);
+router.get("/:id", check, getProduct);
+router.delete("/:id", check, deleteProduct);
+router.post("/add", check, addProduct);
 
 module.exports = router;

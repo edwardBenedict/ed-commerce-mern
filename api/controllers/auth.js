@@ -54,6 +54,15 @@ const register = async (req, res) => {
     user.password = undefined;
     user.__v = undefined;
 
+    // user
+    res.cookie("token", user.token, {
+      maxAge: 86400000,
+      // You can't access these tokens in the client's javascript
+      httpOnly: true,
+      // Forces to use https in production
+      secure: process.env.NODE_ENV === "production" ? true : false,
+    });
+
     res
       .status(201)
       .json({ user, message: "You've registered in successfully!" });
@@ -99,7 +108,7 @@ const login = async (req, res) => {
 
       // user
       res.cookie("token", user.token, {
-        maxAge: 86400,
+        maxAge: 86400000,
         // You can't access these tokens in the client's javascript
         httpOnly: true,
         // Forces to use https in production
