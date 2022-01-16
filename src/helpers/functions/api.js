@@ -26,3 +26,18 @@ export const api = async (url, method, data) => {
     return error;
   }
 };
+
+export const formDataApi = async (url, method, dataObj) => {
+  try {
+    const data = new FormData();
+    let response = {};
+    Object.keys(dataObj).forEach((key) => data.append(key, dataObj[key]));
+
+    const res = await fetch(url, { method: method, body: data });
+    response.status = res.status;
+    const fetchedData = await res.json();
+    return { ...response, fetchedData };
+  } catch (error) {
+    return error;
+  }
+};

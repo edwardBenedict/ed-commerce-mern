@@ -21,8 +21,6 @@ const UpdateProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(product);
-    // const response = await api("/api/products/add", "POST", product);
 
     const response = await api(`/api/products/${id}`, "PUT", product);
     response.status === 200

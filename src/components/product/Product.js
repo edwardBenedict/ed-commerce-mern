@@ -55,6 +55,9 @@ const Product = ({ handleChange, handleSubmit, product }) => {
           />
         </div>
         <div className="m-10">
+          <input type="file" name="file" onChange={handleChange} />
+        </div>
+        <div className="m-10">
           <button type="submit">Submit</button>
         </div>
       </form>
