@@ -31,6 +31,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <input
+              className={styles.input}
               type="text"
               name="email"
               value={credentials.email}
@@ -40,6 +41,7 @@ const Login = () => {
           </div>
           <div>
             <input
+              className={styles.input}
               type="password"
               name="password"
               placeholder="Password"

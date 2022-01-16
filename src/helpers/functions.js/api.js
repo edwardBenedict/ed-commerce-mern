@@ -11,7 +11,6 @@ export const postApi = async (url, data) => {
 
   try {
     const fetchResponse = await fetch(url, config);
-    console.log(fetchResponse);
     response.status = fetchResponse.status;
     const data = await fetchResponse.json();
     return { ...response, ...data };

@@ -20,7 +20,6 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(credentials);
     const response = await postApi("/api/auth/register", credentials);
     response.status === 201
       ? navigate("/")

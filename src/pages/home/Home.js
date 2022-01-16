@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div>
+    <div className="centerize">
       <h1>Home </h1>
       <a href="/register">Register</a>
       <br />
