@@ -6,6 +6,10 @@ const router = require("express").Router();
 let gfs;
 
 const conn = mongoose.connection;
+// This for console warnings.
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
 conn.once("open", function () {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("photos");
