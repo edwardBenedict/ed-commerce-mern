@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
-import { postApi } from "../../helpers/functions.js/api";
+import { api } from "../../helpers/functions/api";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -18,10 +18,10 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postApi("/api/auth/login", credentials);
+    const response = await api("/api/auth/login", "POST", credentials);
     response.status === 200
       ? navigate("/")
-      : console.log("Error:", response.message);
+      : console.log("Error:", response.data.message);
   };
 
   return (

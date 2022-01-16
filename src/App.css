@@ -1,6 +1,23 @@
 .centerize {
   text-align: center;
 }
+
 .m-10 {
   margin: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.border-1-black {
+  border: 1px solid #000;
+}
+
+.bor-rad-3 {
+  border-radius: 3px;
 }

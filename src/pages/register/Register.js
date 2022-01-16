@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postApi } from "../../helpers/functions.js/api";
+import { api } from "../../helpers/functions/api";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -20,10 +20,10 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postApi("/api/auth/register", credentials);
+    const response = await api("/api/auth/register", "POST", credentials);
     response.status === 201
       ? navigate("/")
-      : console.log("Error:", response.message);
+      : console.log("Error:", response.data.message);
   };
 
   return (

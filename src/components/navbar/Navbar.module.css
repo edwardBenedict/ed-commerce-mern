@@ -1,6 +1,6 @@
 .navbarWrapper {
   display: flex;
-  width: 100%;
+  width: calc(100% - 20px);
   justify-content: space-around;
   padding: 10px;
   background-color: #131921;

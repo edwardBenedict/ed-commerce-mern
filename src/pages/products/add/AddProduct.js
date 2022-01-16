@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { postApi } from "../../../helpers/functions.js/api";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../../helpers/functions/api";
 
 const AddProduct = () => {
+  let navigate = useNavigate();
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -17,9 +19,9 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postApi("/api/products/add", product);
+    const response = await api("/api/products/add", "POST", product);
     response.status === 200
-      ? console.log("Added Successfully!")
+      ? navigate("/products")
       : console.log("Error:", response.message);
   };
 
