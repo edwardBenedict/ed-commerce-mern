@@ -60,4 +60,20 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { addProduct, getProducts, deleteProduct, getProduct };
+const updateProduct = async (req, res) => {
+  Product.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+};
+
+module.exports = {
+  addProduct,
+  getProducts,
+  deleteProduct,
+  getProduct,
+  updateProduct,
+};

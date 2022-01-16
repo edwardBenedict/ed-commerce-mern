@@ -3,7 +3,9 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   return (
     <nav className={styles.navbarWrapper}>
-      <div>Unique</div>
+      <div>
+        <a href="/">edCommerce</a>
+      </div>
       <div className={styles.rightBar}>
         <a href="/products">Products</a>
         <a href="/login">Login</a>
