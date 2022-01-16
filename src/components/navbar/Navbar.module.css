@@ -1,0 +1,14 @@
+.navbarWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #131921;
+  color: white;
+}
+
+.rightBar a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
