@@ -46,6 +46,7 @@ const Products = () => {
             <p>Price: {product.price}</p>
             <p>description: {product.description}</p>
             <p>category: {product.category}</p>
+            <img src={product.image} alt="cw" />
             <p>
               Created At:{" "}
               {new Date(product.createdAt)

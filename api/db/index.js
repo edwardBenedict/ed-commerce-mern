@@ -5,7 +5,10 @@ require("dotenv").config();
 const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@trainingcluster.tpyei.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 function dbConnection() {
   mongoose
-    .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(dbURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
       console.log("MongoDB:     Connected to MongoDB Successfully!");
     })

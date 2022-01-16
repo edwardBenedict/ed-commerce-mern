@@ -2,6 +2,7 @@ const Product = require("../db/models/product");
 
 const addProduct = async (req, res) => {
   // Our login logic starts here
+
   try {
     // Get user input
     const { name, category, description, price, brand } = req.body;
@@ -9,9 +10,13 @@ const addProduct = async (req, res) => {
     // Validate user input
     if (!(name && category && description && price && brand)) {
       return res.status(400).send({
-        message: "Name, Category, Description and Price is required!",
+        message: "Name, Category, Description, Brand and Price is required!",
       });
     }
+
+    if (req.file === undefined)
+      return res.json({ message: "You must select a file." });
+    const imgUrl = `${process.env.HOST_DOMAIN}:${process.env.SERVER_PORT}/file/${req.file.filename}`;
 
     const product = await Product.create({
       name,
@@ -19,6 +24,7 @@ const addProduct = async (req, res) => {
       description,
       price,
       brand,
+      image: imgUrl,
     });
 
     res.status(200).json({ product, message: "Product added Successfully!" });

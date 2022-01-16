@@ -8,6 +8,12 @@ const ProductSchema = new mongoose.Schema(
       required: "Name is required!",
       trim: true,
     },
+    image: {
+      type: String,
+      default: null,
+      required: "Image is required!",
+      trim: true,
+    },
     category: {
       type: String,
       default: null,
